@@ -8,13 +8,13 @@ import {
 } from "@mui/material";
 import useSWR, { mutate, SWRConfig } from "swr";
 import axios from "axios";
-import {
-  SettingsEthernet as AddressIcon,
-  ShowChart as CpuIcon,
-  Memory as MemoryIcon,
-  Save as DiskIcon,
-  SettingsEthernet as NetworkIcon,
-} from "@mui/icons-material";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { 
+  faMicrochip,
+  faHardDrive,
+  faMemory,
+  faEthernet
+} from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from "react";
 import prettyBytes from "pretty-bytes";
 import Link from "next/link";
@@ -161,10 +161,7 @@ export default function Server({ server }) {
               </Grid>
               <Grid container item xs={2} md={2} lg={2} xl={2}>
                 <Box display="flex" sx={{ margin: "auto" }}>
-                  <NetworkIcon
-                    sx={{ fontWeight: "bold", mr: 1 }}
-                    fontSize="small"
-                  />
+                  <FontAwesomeIcon icon={faEthernet} sx={{ mr: 1 }} size="sm" />
                   <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                     {Allocation().ip_alias + ":" + Allocation().port}
                   </Typography>
@@ -190,13 +187,13 @@ export default function Server({ server }) {
                     display: "flex",
                   }}
                 >
-                  <CpuIcon fontSize="small" sx={{ mr: 1 }} />
+                  <FontAwesomeIcon icon={faMicrochip} sx={{ mr: 1 }} size="sm" />
                   <Typography variant="body1" noWrap>
                     {monitor_data.usage.cpu != null ? parseFloat(monitor_data.usage.cpu).toFixed(2) + "%" : ""}
                   </Typography>
                 </Box>
                 <Box display="flex" sx={{ margin: "auto" }}>
-                  <MemoryIcon fontSize="small" sx={{ mr: 1 }} />
+                  <FontAwesomeIcon icon={faMemory} sx={{ mr: 1 }} size="sm" />
                   <Typography variant="body1" noWrap>
                     {monitor_data.usage.memory ? prettyBytes(monitor_data.usage.memory) : ""}/
                     {prettyBytes(server.limits.memory * 1048576, {
@@ -205,7 +202,7 @@ export default function Server({ server }) {
                   </Typography>
                 </Box>
                 <Box display="flex" sx={{ margin: "auto" }}>
-                  <DiskIcon fontSize="small" sx={{ mr: 0.2 }} />
+                <FontAwesomeIcon icon={faHardDrive} sx={{ mr: 1 }} size="sm" />
                   <Typography variant="body1" noWrap>
                     {monitor_data.usage.disk ? prettyBytes(monitor_data.usage.disk): ""}/
                     {prettyBytes(server.limits.disk * 1000000)}
